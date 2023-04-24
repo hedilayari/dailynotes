@@ -1,0 +1,68 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="dailynote">
+    <!--on ajoute ici le bouton menu-->
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title> DailyNote</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar color="dailynote">
+      <ion-title size="large">Blank</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-card class="welcome-card">
+    <img alt="Silhouette of mountains" src="\assets\dailynote_hero.jpg" />
+    <ion-card-header>
+      <ion-card-subtitle>Pour ne rien oublier , ou que vous soyez</ion-card-subtitle>
+      <ion-card-title>Essayez DailyNote</ion-card-title>
+
+    </ion-card-header>
+
+    <ion-card-content>
+      Notez tout ce qui vous passe par la tete , Ajoutez des notes,des listes des des photos et des contenus audio
+    </ion-card-content>
+  </ion-card>
+
+
+  <ion-card *ngFor="let note of notes">
+    <ion-card-header>
+      <ion-card-title>{{note.title}}</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <p>{{note.content}}</p>
+    </ion-card-content>
+  </ion-card>
+
+<!--ici le code de <ion-card class="welcome-card" > -->
+<!--On rajoute ici la dernière note-->
+<ng-container *ngIf="note">
+  <ion-item>
+  <ion-label> Dernière note :</ion-label>
+  </ion-item>
+  <ion-card [routerLink]="'note/' + note.id" routerDirection="forward">
+  <ion-card-header>
+  <ion-card-title>{{note.title}}</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+  <p>{{note.content}}</p>
+  <h6 class="ion-text-end">
+  Editée le:{{note.time_stamp|date: 'dd/MM/yyyy - HH:mm'}} </h6>
+  </ion-card-content>
+  </ion-card>
+  </ng-container>
+  <!--On ajoute ici le bouton flotant-->
+
+  <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+    <ion-fab-button color="dailynote" (click)="addNote()">
+    <ion-icon name="add"></ion-icon>
+    </ion-fab-button>    
+  </ion-fab>
+
+
+</ion-content>
